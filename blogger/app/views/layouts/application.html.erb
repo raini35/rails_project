@@ -9,6 +9,30 @@
   </head>
 
   <body>
+  <header class="navbar  navbar-inverse">
+    <div class="navbar-class">
+      <div class="container">
+
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <ul class="nav navbar-nav">
+          <li><%=link_to "HOME", root_path%></li>
+          <li><%=link_to "ARTICLES", articles_path %></li>
+          <li><%=link_to "TAGS", tags_path %></li>
+			<% if !logged_in? %>
+          <li><%=link_to "LOGIN", login_path %></li>
+			<% end %>
+			<% if logged_in? %>
+          <li><%=link_to "LOGOUT", logout_path %></li>
+			<% end %>
+          
+        </ul>
+
+
+      </div>
+    </div>
+  </header>
   	<p class="flash"><%= flash.notice %></p>
   	<div id="container">
 		<div id="content">  	  

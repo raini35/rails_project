@@ -27,6 +27,7 @@ class ArticlesController < ApplicationController
 	
 	def create
 		@article = Article.new(article_params)
+		@article.author = current_user
 		@article.save
 		
 		flash.notice = "Article '#{@article.title}' Created!"
@@ -44,7 +45,14 @@ class ArticlesController < ApplicationController
 		
 		redirect_to articles_path
 	end
+before_filter :require_permission, only: [:edit, :update ]
 
+def require_permission
+  if current_user != Article.find(params[:id]).author
+    redirect_to root_path
+    #Or do something else here
+  end
+end
 	def edit 
 		@article = Article.find(params[:id])
 	end 
